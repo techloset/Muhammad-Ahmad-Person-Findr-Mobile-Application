@@ -1,0 +1,40 @@
+
+{
+  "project_info": {
+    "project_number": "422069894074",
+    "project_id": "findr-a5fec",
+    "storage_bucket": "findr-a5fec.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:422069894074:android:45a84619c31c964dffbb83",
+        "android_client_info": {
+          "package_name": "com.findr"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "422069894074-ukc0b7e0jh885h4jpnsq1hf67g5fn540.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAkvqyNGD4TkCsQYT6JYh6Sy83_Rp8686s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "422069894074-ukc0b7e0jh885h4jpnsq1hf67g5fn540.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
