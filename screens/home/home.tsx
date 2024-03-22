@@ -17,6 +17,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import {useSelector} from 'react-redux';
 import {RootState} from '../../redux/store/Store';
 import useReports from '../reports/useReports';
+import {Images} from '../../assets/constants/constants';
 import auth from '@react-native-firebase/auth';
 const Home = ({navigation}: any) => {
   const user = auth()?.currentUser;
@@ -44,21 +45,12 @@ const Home = ({navigation}: any) => {
   return (
     <View>
       <Text style={styles.Findr}>Findr</Text>
-      <Image
-        style={styles.searchForHope}
-        source={require('../../assets/home/SearchForHope.png')}
-      />
+      <Image style={styles.searchForHope} source={Images.searchForHope2} />
       <View style={styles.searchinput}>
         <TextInput placeholder="Search" style={{marginLeft: 16}} />
-        <Image
-          style={styles.search}
-          source={require('../../assets/home/search.png')}
-        />
+        <Image style={styles.search} source={Images.search} />
       </View>
-      <Image
-        style={styles.main}
-        source={require('../../assets/home/main.png')}
-      />
+      <Image style={styles.main} source={Images.main} />
       <View style={{marginTop: 20, flexDirection: 'row', marginHorizontal: 40}}>
         <Text style={{fontWeight: '400', fontSize: 23, color: '#0F0F0F'}}>
           Featured Profiles
@@ -134,10 +126,7 @@ const Home = ({navigation}: any) => {
                       setSelectedCardIndex(null); // Reset selected card index when modal is closed
                       setModalVisible(false);
                     }}>
-                    <Image
-                      style={styles.cancel}
-                      source={require('../../assets/Editprofile/cancel.png')}
-                    />
+                    <Image style={styles.cancel} source={Images.cancel} />
                   </TouchableOpacity>
                   <Image
                     style={styles.personpopup}

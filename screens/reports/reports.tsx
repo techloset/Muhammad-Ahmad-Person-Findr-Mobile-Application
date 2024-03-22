@@ -16,7 +16,7 @@ import {useSelector} from 'react-redux';
 import {RootState} from '../../redux/store/Store';
 import useReports from './useReports';
 import auth from '@react-native-firebase/auth';
-
+import {Images} from '../../assets/constants/constants';
 const App = ({navigation}: any) => {
   const user = auth()?.currentUser;
   const {loading} = useSelector((state: RootState) => state.firestore);
@@ -47,10 +47,7 @@ const App = ({navigation}: any) => {
       <View>
         <View style={styles.first}>
           <TouchableOpacity onPress={() => navigation.navigate('Home')}>
-            <Image
-              style={styles.backButton}
-              source={require('../../assets/forgot/backPage.png')}
-            />
+            <Image style={styles.backButton} source={Images.backPage} />
           </TouchableOpacity>
           <Text style={styles.h1}>Missing Person Details</Text>
         </View>
@@ -61,10 +58,7 @@ const App = ({navigation}: any) => {
             value={searchQuery}
             onChangeText={setSearchQuery}
           />
-          <Image
-            style={styles.search}
-            source={require('../../assets/home/search.png')}
-          />
+          <Image style={styles.search} source={Images.search} />
         </View>
         <View style={styles.filterDiv}>
           <Text style={styles.filterText}>Filter By:</Text>
@@ -135,10 +129,7 @@ const App = ({navigation}: any) => {
                       setSelectedCardIndex(null); // Reset selected card index when modal is closed
                       setModalVisible(false);
                     }}>
-                    <Image
-                      style={styles.cancel}
-                      source={require('../../assets/Editprofile/cancel.png')}
-                    />
+                    <Image style={styles.cancel} source={Images.cancel} />
                   </TouchableOpacity>
                   <Image
                     style={styles.personpopup}

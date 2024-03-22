@@ -12,7 +12,7 @@ import {
 import FormInput from '../../components/form/FormInput';
 import useUpload from './useUpload';
 import DateTimePicker from '@react-native-community/datetimepicker';
-
+import {Images} from '../../assets/constants/constants';
 const Upload = ({navigation}: any) => {
   const {
     handleChange,
@@ -31,10 +31,7 @@ const Upload = ({navigation}: any) => {
       <View>
         <View style={styles.first}>
           <TouchableOpacity onPress={() => navigation.navigate('Home')}>
-            <Image
-              style={styles.backButton}
-              source={require('../../assets/forgot/backPage.png')}
-            />
+            <Image style={styles.backButton} source={Images.backPage} />
           </TouchableOpacity>
           <Text style={styles.h1}>Missing Person Details</Text>
         </View>
@@ -68,10 +65,7 @@ const Upload = ({navigation}: any) => {
               placeholder="Select Date"
               value={data.Dateofbirth} // Display date in the input
             />
-            <Image
-              style={{marginRight: 10}}
-              source={require('../../assets/signin/Calendar.png')}
-            />
+            <Image style={{marginRight: 10}} source={Images.calender} />
           </View>
         </TouchableOpacity>
         {showPicker && (
@@ -127,7 +121,7 @@ const Upload = ({navigation}: any) => {
         <View style={{height: 250, width: 430, marginLeft: 20, marginTop: 20}}>
           <TouchableOpacity onPress={imagePicker}>
             <ImageBackground
-              source={require('../../assets/home/imagePiker.png')}
+              source={Images.imagePicker}
               style={{width: '90%', height: '100%'}}>
               {selectedImage ? (
                 <Image

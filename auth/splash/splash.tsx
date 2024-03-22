@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import * as Animatable from 'react-native-animatable';
 import {View, Text, Image} from 'react-native';
+import {Images} from '../../assets/constants/constants';
 const Splash = ({navigation}: any) => {
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -31,7 +32,7 @@ const Splash = ({navigation}: any) => {
         style={{marginLeft: 193, marginRight: 95}}
         duration={3000}
         animation="flipInY">
-        <Image source={require('../../assets/signin/Search.png')} />
+        <Image source={Images.searchForHope1} />
       </Animatable.View>
     </View>
   );

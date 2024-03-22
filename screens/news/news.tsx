@@ -9,6 +9,7 @@ import {
   ScrollView,
   TextInput,
 } from 'react-native';
+import {Images} from '../../assets/constants/constants';
 import React, {useState} from 'react';
 const News = ({navigation}: any) => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -16,10 +17,7 @@ const News = ({navigation}: any) => {
     <ScrollView>
       <View style={styles.first}>
         <TouchableOpacity onPress={() => navigation.navigate('Home')}>
-          <Image
-            style={styles.backButton}
-            source={require('../../assets/forgot/backPage.png')}
-          />
+          <Image style={styles.backButton} source={Images.backPage} />
         </TouchableOpacity>
         <Text style={styles.h1}>Reports</Text>
       </View>
@@ -31,10 +29,7 @@ const News = ({navigation}: any) => {
           marginBottom: 16,
         }}>
         <View>
-          <Image
-            style={styles.person}
-            source={require('../../assets/home/person.png')}
-          />
+          <Image style={styles.person} source={Images.profileIcon} />
         </View>
         <View style={{marginLeft: 8}}>
           <Text>Name: Akriti Dwivedi</Text>
@@ -56,10 +51,7 @@ const News = ({navigation}: any) => {
           marginBottom: 16,
         }}>
         <View>
-          <Image
-            style={styles.person}
-            source={require('../../assets/home/person.png')}
-          />
+          <Image style={styles.person} source={Images.profileIcon} />
         </View>
         <View style={{marginLeft: 8}}>
           <Text>Name: Akriti Dwivedi</Text>
@@ -81,10 +73,7 @@ const News = ({navigation}: any) => {
           marginBottom: 16,
         }}>
         <View>
-          <Image
-            style={styles.person}
-            source={require('../../assets/home/person.png')}
-          />
+          <Image style={styles.person} source={Images.profileIcon} />
         </View>
         <View style={{marginLeft: 8}}>
           <Text>Name: Akriti Dwivedi</Text>
@@ -112,15 +101,9 @@ const News = ({navigation}: any) => {
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
               <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
-                <Image
-                  style={styles.cancel}
-                  source={require('../../assets/Editprofile/cancel.png')}
-                />
+                <Image style={styles.cancel} source={Images.cancel} />
               </TouchableOpacity>
-              <Image
-                style={styles.personpopup}
-                source={require('../../assets/Editprofile/person.png')}
-              />
+              <Image style={styles.personpopup} source={Images.profileIcon} />
               <Text style={{color: '#000000'}}>Akriti Dwivedi</Text>
               <Text style={{color: '#000000'}}>25 Years Old Male</Text>
               <Text style={{color: '#000000'}}>

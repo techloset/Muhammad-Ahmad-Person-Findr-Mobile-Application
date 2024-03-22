@@ -12,6 +12,8 @@ import {
 } from 'react-native';
 import React, {Component} from 'react';
 import useSignup from './useSignup';
+import {Images} from '../../assets/constants/constants';
+
 const styles = StyleSheet.create({
   container: {
     paddingTop: 0,
@@ -22,6 +24,7 @@ const styles = StyleSheet.create({
     marginLeft: 230,
   },
 });
+
 const Signup = ({navigation}: any) => {
   const {
     getNameColor,
@@ -39,13 +42,9 @@ const Signup = ({navigation}: any) => {
   {
     return (
       <ScrollView style={styles.container}>
-        <Image
-          style={styles.stretch}
-          source={require('../../assets/signin/Vector.png')}
-        />
+        <Image style={styles.stretch} source={Images.vector} />
         <Text style={style.Findr}>Findr</Text>
         <Text style={style.mainheading}>Join the Search for Hope</Text>
-
         <Text style={style.name}>Name</Text>
         <TextInput
           style={[style.input1, {color: getNameColor()}]}
@@ -56,13 +55,9 @@ const Signup = ({navigation}: any) => {
           value={inputValue}
           placeholder="Please type here…"
         />
-
         <Text style={style.textemail}>Email</Text>
         <View style={style.inputemail}>
-          <Image
-            style={{marginLeft: 15}}
-            source={require('../../assets/signin/Icon.png')}
-          />
+          <Image style={{marginLeft: 15}} source={Images.emailIcon} />
           <TextInput
             style={{
               flex: 1,
@@ -94,7 +89,6 @@ const Signup = ({navigation}: any) => {
           }}>
           Your password must be 8 character.{' '}
         </Text>
-
         <View
           style={{flexDirection: 'row', marginLeft: 33, alignItems: 'center'}}>
           <View style={{marginRight: 8, marginTop: 8}}>

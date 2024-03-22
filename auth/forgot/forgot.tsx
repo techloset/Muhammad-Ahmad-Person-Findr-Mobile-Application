@@ -5,14 +5,13 @@ import {
   StyleSheet,
   TextInput,
   TouchableOpacity,
-  Alert,
-  Button,
 } from 'react-native';
 import useForgot from './useForgot';
-import {useState} from 'react';
+import {Images} from '../../assets/constants/constants';
 
 export const Forgot = ({navigation}: any) => {
   const {handleResetPassword, email, setEmail} = useForgot(navigation);
+
   return (
     <View>
       <View
@@ -20,14 +19,14 @@ export const Forgot = ({navigation}: any) => {
         <TouchableOpacity onPress={() => navigation.navigate('Login')}>
           <Image
             style={{marginLeft: 3, width: 18, height: 12, marginTop: 11}}
-            source={require('../../assets/forgot/backPage.png')}
+            source={Images.backPage}
           />
         </TouchableOpacity>
         <Text style={styles.forget}>Forgot Password</Text>
       </View>
       <Image
         style={{marginHorizontal: 40, marginTop: 56}}
-        source={require('../../assets/forgot/forgotPage.png')}
+        source={Images.forgetMainPic}
       />
       <Text style={{textAlign: 'center', marginTop: 34, color: '#222526'}}>
         Please enter the email address associated
@@ -41,10 +40,7 @@ export const Forgot = ({navigation}: any) => {
 
       <Text style={styles.emailH}>Email</Text>
       <View style={styles.fullinput}>
-        <Image
-          style={{marginLeft: 15}}
-          source={require('../../assets/forgot/Icon.png')}
-        />
+        <Image style={{marginLeft: 15}} source={Images.emailIcon} />
         <TextInput
           style={styles.input}
           onChangeText={text => setEmail(text)}

@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import React from 'react';
 import auth from '@react-native-firebase/auth';
-
+import {Images} from '../../assets/constants/constants';
 const Profile = ({navigation}: any) => {
   const user = auth()?.currentUser;
 
@@ -28,7 +28,7 @@ const Profile = ({navigation}: any) => {
         <TouchableOpacity onPress={() => navigation.navigate('Home')}>
           <Image
             style={{marginLeft: 35, width: 18, height: 12, marginTop: 21}}
-            source={require('../../assets/Editprofile/backPage.png')}
+            source={Images.backPage}
           />
         </TouchableOpacity>
         <Text style={styles.mainHeading}>Edit Profile</Text>
@@ -44,27 +44,20 @@ const Profile = ({navigation}: any) => {
               marginRight: 24,
               marginTop: 12,
             }}
-            source={require('../../assets/Editprofile/Logout.png')}
+            source={Images.Logout}
           />
         </TouchableOpacity>
       </View>
       <Image
         style={styles.personpicture}
-        source={
-          user?.photoURL
-            ? {uri: user.photoURL}
-            : require('../../assets/Editprofile/personLogo.png')
-        }
+        source={user?.photoURL ? {uri: user.photoURL} : Images.personLogo}
       />
       <Text style={styles.name}>Name</Text>
       <TextInput style={styles.input1} value={user?.displayName || ''} />
 
       <Text style={styles.textemail}>Email</Text>
       <View style={styles.inputemail}>
-        <Image
-          style={{marginLeft: 15}}
-          source={require('../../assets/Editprofile/Icon.png')}
-        />
+        <Image style={{marginLeft: 15}} source={Images.emailIcon} />
         <TextInput
           style={{
             flex: 1,

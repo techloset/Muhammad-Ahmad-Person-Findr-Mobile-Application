@@ -1,25 +1,3 @@
-// // FormInput.tsx
-
-// import React from 'react';
-// import {TextInput, TextInputProps} from 'react-native';
-
-// interface FormInputProps extends TextInputProps {
-//   value?: string;
-//   onChangeText: (text: string) => void;
-//   placeholder?: string;
-//   autoFocus?: boolean;
-//   // Add more props as needed
-// }
-
-// const FormInput: React.FC<FormInputProps> = ({
-//   value,
-//   onChangeText,
-//   ...rest
-// }) => {
-//   return <TextInput value={value} onChangeText={onChangeText} {...rest} />;
-// };
-
-// export default FormInput;
 import React from 'react';
 import {TextInput, TextInputProps, StyleSheet} from 'react-native';
 
@@ -27,7 +5,6 @@ interface FormInputProps extends TextInputProps {
   value?: string;
   onChangeText: (text: string) => void;
   placeholder?: string;
-  // Add more props as needed
 }
 
 const FormInput: React.FC<FormInputProps> = ({

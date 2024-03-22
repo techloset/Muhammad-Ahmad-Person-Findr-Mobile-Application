@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {AppThunk} from '../store/Store'; // Assuming you have a store setup with Thunks
+import {AppThunk} from '../store/Store';
 import firestore from '@react-native-firebase/firestore';
 
 interface UserData {
@@ -11,7 +11,7 @@ interface UserData {
 interface FirestoreState {
   data: UserData[];
   loading: boolean;
-  error: any; // Adjust this type according to your error handling
+  error: any;
 }
 
 const initialState: FirestoreState = {

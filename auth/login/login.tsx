@@ -8,25 +8,19 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {useLogin} from './useLogin';
+import {Images} from '../../assets/constants/constants';
 
 const Login = ({navigation}: any) => {
   const {GoogleSignIn, handleSignIn, setEmail, userEmail, setPassword} =
     useLogin(navigation);
-
   return (
     <View>
       <Text style={styles.Findr}>Findr</Text>
-      <Image
-        style={styles.searchForHope}
-        source={require('../../assets/login/SearchForHope.png')}
-      />
+      <Image style={styles.searchForHope} source={Images.searchForHope2} />
       <Text style={styles.mainheading1}>Welcome Back</Text>
       <Text style={styles.headinginput1}>Email</Text>
       <View style={styles.firstinput}>
-        <Image
-          style={{marginLeft: 15}}
-          source={require('../../assets/login/Icon.png')}
-        />
+        <Image style={{marginLeft: 15}} source={Images.emailIcon} />
         <TextInput
           placeholder="Please type here…"
           onChangeText={Email => setEmail(Email)}
@@ -60,7 +54,7 @@ const Login = ({navigation}: any) => {
       </View>
       <Image
         style={{width: 400, height: 33, marginTop: 21}}
-        source={require('../../assets/login/or.png')}
+        source={Images.or}
       />
       <TouchableOpacity
         onPress={() =>
@@ -78,12 +72,12 @@ const Login = ({navigation}: any) => {
             marginHorizontal: 175,
             marginTop: 27,
           }}
-          source={require('../../assets/login/google.png')}
+          source={Images.google}
         />
       </TouchableOpacity>
       <Image
         style={{width: 200, height: 85, marginLeft: 105, marginTop: 60}}
-        source={require('../../assets/login/Vector2.png')}
+        source={Images.vector2}
       />
     </View>
   );
