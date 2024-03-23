@@ -13,12 +13,7 @@ const FormInput: React.FC<FormInputProps> = ({
   ...rest
 }) => {
   return (
-    <TextInput
-      style={styles.input}
-      value={value}
-      onChangeText={onChangeText}
-      placeholder="First Chracter Must Be Capital"
-    />
+    <TextInput style={styles.input} value={value} onChangeText={onChangeText} />
   );
 };
 

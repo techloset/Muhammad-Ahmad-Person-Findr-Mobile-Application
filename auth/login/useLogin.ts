@@ -69,7 +69,7 @@ export const useLogin = (navigation: any) => {
       };
 
       await firestore()
-        .collection('Users')
+        .collection('allUserAuth')
         .doc(userCredential.user.uid)
         .set(userData);
 

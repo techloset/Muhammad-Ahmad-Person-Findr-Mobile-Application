@@ -11,8 +11,10 @@ import {
 } from 'react-native';
 import {Images} from '../../assets/constants/constants';
 import React, {useState} from 'react';
+
 const News = ({navigation}: any) => {
   const [modalVisible, setModalVisible] = useState(false);
+
   return (
     <ScrollView>
       <View style={styles.first}>

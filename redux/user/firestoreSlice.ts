@@ -55,7 +55,7 @@ export const fetchDataFromFirestore =
   ) => {
     try {
       dispatch(fetchDataStart());
-      const querySnapshot = await firestore().collection('User Data').get();
+      const querySnapshot = await firestore().collection('allUserData').get();
       const data: UserData[] = querySnapshot.docs.map(doc => ({
         id: doc.id,
         ...doc.data(),

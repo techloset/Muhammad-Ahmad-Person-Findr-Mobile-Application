@@ -13,6 +13,7 @@ import FormInput from '../../components/form/FormInput';
 import useUpload from './useUpload';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import {Images} from '../../assets/constants/constants';
+
 const Upload = ({navigation}: any) => {
   const {
     handleChange,
@@ -63,7 +64,7 @@ const Upload = ({navigation}: any) => {
               style={styles.datePickerInput}
               editable={false}
               placeholder="Select Date"
-              value={data.Dateofbirth} // Display date in the input
+              value={data.Dateofbirth}
             />
             <Image style={{marginRight: 10}} source={Images.calender} />
           </View>
@@ -118,7 +119,7 @@ const Upload = ({navigation}: any) => {
           keyboardType="numeric"
         />
         <Text style={styles.h2}>Upload Photographs</Text>
-        <View style={{height: 250, width: 430, marginLeft: 20, marginTop: 20}}>
+        <View style={{height: 250, width: 450, marginLeft: 20, marginTop: 20}}>
           <TouchableOpacity onPress={imagePicker}>
             <ImageBackground
               source={Images.imagePicker}

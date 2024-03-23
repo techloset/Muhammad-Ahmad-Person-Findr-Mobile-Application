@@ -25,7 +25,7 @@ const Signup = ({navigation}: any) => {
         const uid = auth().currentUser?.uid;
 
         try {
-          await firestore().collection('Users').doc(uid).set({
+          await firestore().collection('allUserAuth').doc(uid).set({
             name,
             email,
             password,

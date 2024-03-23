@@ -14,14 +14,11 @@ const Profile = ({navigation}: any) => {
   const user = auth()?.currentUser;
 
   const signout = async () => {
-    try {
-      await auth().signOut();
-      Alert.alert('User Signout');
-      navigation.navigate('Login');
-    } catch (error) {
-      console.error(error);
-    }
+    await auth().signOut();
+    Alert.alert('User Signout');
+    navigation.navigate('Login');
   };
+
   return (
     <View>
       <View style={styles.firstRow}>
@@ -76,6 +73,7 @@ const Profile = ({navigation}: any) => {
     </View>
   );
 };
+
 const styles = StyleSheet.create({
   firstRow: {
     flexDirection: 'row',

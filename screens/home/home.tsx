@@ -19,6 +19,7 @@ import {RootState} from '../../redux/store/Store';
 import useReports from '../reports/useReports';
 import {Images} from '../../assets/constants/constants';
 import auth from '@react-native-firebase/auth';
+
 const Home = ({navigation}: any) => {
   const user = auth()?.currentUser;
   const {loading} = useSelector((state: RootState) => state.firestore);
@@ -27,6 +28,7 @@ const Home = ({navigation}: any) => {
   const [selectedCardIndex, setSelectedCardIndex] = useState<number | null>(
     null,
   );
+
   const handleEmailContact = () => {
     if (user?.email) {
       Linking.openURL(`mailto:${user.email}`);
@@ -34,6 +36,7 @@ const Home = ({navigation}: any) => {
       Alert.alert('Error', 'User email not found');
     }
   };
+
   if (loading) {
     return (
       <View style={styles.loadingContainer}>
@@ -42,6 +45,7 @@ const Home = ({navigation}: any) => {
       </View>
     );
   }
+
   return (
     <View>
       <Text style={styles.Findr}>Findr</Text>
@@ -94,7 +98,7 @@ const Home = ({navigation}: any) => {
                       setSelectedCardIndex(index);
                       setModalVisible(true);
                     }}>
-                    <Text style={styles.buttontext}>Contact Person</Text>
+                    <Text style={styles.buttontext}>View Details</Text>
                   </TouchableOpacity>
                 </View>
               </LinearGradient>
@@ -123,7 +127,7 @@ const Home = ({navigation}: any) => {
                 <View style={styles.modalView}>
                   <TouchableOpacity
                     onPress={() => {
-                      setSelectedCardIndex(null); // Reset selected card index when modal is closed
+                      setSelectedCardIndex(null);
                       setModalVisible(false);
                     }}>
                     <Image style={styles.cancel} source={Images.cancel} />
@@ -247,7 +251,7 @@ const styles = StyleSheet.create({
     width: 213,
     height: 44,
     borderRadius: 8,
-    backgroundColor: 'red',
+    backgroundColor: '#CC4141',
     marginRight: 16,
   },
   mainHeading: {

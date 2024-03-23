@@ -139,7 +139,6 @@ const Navigation = () => {
   const [initializing, setInitializing] = useState(true);
   const [user, setUser] = useState();
 
-  // Handle user state changes
   function onAuthStateChanged(user: any) {
     setUser(user);
     if (initializing) setInitializing(false);
@@ -147,7 +146,7 @@ const Navigation = () => {
 
   useEffect(() => {
     const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
-    return subscriber; // unsubscribe on unmount
+    return subscriber;
   }, []);
 
   if (initializing) return null;

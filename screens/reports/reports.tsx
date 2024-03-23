@@ -17,15 +17,26 @@ import {RootState} from '../../redux/store/Store';
 import useReports from './useReports';
 import auth from '@react-native-firebase/auth';
 import {Images} from '../../assets/constants/constants';
+import useUpload from ' ../../../screens/upload/useUpload';
+
 const App = ({navigation}: any) => {
+  const {handleChange, data} = useUpload(navigation);
   const user = auth()?.currentUser;
   const {loading} = useSelector((state: RootState) => state.firestore);
   const [searchQuery, setSearchQuery] = useState('');
-  const {handleFilter, filteredReports, modalVisible, setModalVisible} =
-    useReports(navigation);
+  const {
+    handleFilter,
+    filteredReports,
+    handleSubmit,
+    setNewData,
+    handleOpen,
+    modalVisible,
+    setModalVisible,
+  } = useReports(navigation);
   const [selectedCardIndex, setSelectedCardIndex] = useState<number | null>(
     null,
   );
+
   const handleEmailContact = () => {
     if (user?.email) {
       Linking.openURL(`mailto:${user.email}`);
@@ -33,14 +44,6 @@ const App = ({navigation}: any) => {
       Alert.alert('Error', 'User email not found');
     }
   };
-
-  if (loading) {
-    return (
-      <View style={styles.loadingContainer}>
-        <ActivityIndicator size="large" color="blue" />
-      </View>
-    );
-  }
 
   return (
     <ScrollView>
@@ -86,21 +89,22 @@ const App = ({navigation}: any) => {
                   source={{uri: report.PictureURL}}
                 />
               </View>
-
               <View style={{marginLeft: 8}}>
                 <Text>Name : {report.Name}</Text>
                 <Text>NickName : {report.Nickname}</Text>
                 <Text>Reported By : {report.ReportedBy}</Text>
+
                 <Text style={{width: 250}}>
                   Last Scene Location : {report.LastSceneLocation}
                 </Text>
                 <TouchableOpacity
                   style={styles.button}
                   onPress={() => {
+                    handleOpen({report});
                     setSelectedCardIndex(index);
                     setModalVisible(true);
                   }}>
-                  <Text style={styles.buttontext}>Contact Person</Text>
+                  <Text style={styles.buttontext}>Details</Text>
                 </TouchableOpacity>
               </View>
             </View>
@@ -142,6 +146,7 @@ const App = ({navigation}: any) => {
                   <Text style={{color: '#000000'}}>
                     Last Seen Location : {report.LastSceneLocation}
                   </Text>
+
                   <TextInput
                     placeholder="Location"
                     style={{
@@ -154,7 +159,14 @@ const App = ({navigation}: any) => {
                       gap: 10,
                       padding: 8,
                     }}
+                    onChangeText={text =>
+                      setNewData(prevState => ({
+                        ...prevState,
+                        NewLocation: text,
+                      }))
+                    }
                   />
+
                   <TextInput
                     placeholder="More Description"
                     style={{
@@ -167,14 +179,23 @@ const App = ({navigation}: any) => {
                       gap: 10,
                       padding: 8,
                     }}
+                    onChangeText={text =>
+                      setNewData(prevState => ({
+                        ...prevState,
+                        Description: text,
+                      }))
+                    }
                   />
+
                   <TouchableOpacity
                     style={styles.email}
                     onPress={handleEmailContact}>
                     <Text style={styles.emailtext}>Contact Via Email</Text>
                   </TouchableOpacity>
                   <TouchableOpacity style={styles.report}>
-                    <Text style={styles.reporttext}>Report Found</Text>
+                    <Text style={styles.reporttext} onPress={handleSubmit}>
+                      Report Found
+                    </Text>
                   </TouchableOpacity>
                 </View>
               </View>
@@ -186,7 +207,6 @@ const App = ({navigation}: any) => {
   );
 };
 
-// Styles
 const styles = StyleSheet.create({
   centeredView: {
     flex: 1,

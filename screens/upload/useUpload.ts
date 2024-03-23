@@ -7,7 +7,7 @@ import {
 } from 'react-native-image-picker';
 import firestore from '@react-native-firebase/firestore';
 import {firebase} from '@react-native-firebase/storage';
-
+import auth from '@react-native-firebase/auth';
 const Upload = ({navigation}: any) => {
   const [selectedImage, setSelectedImage] = useState('');
   const [date, setDate] = useState(new Date());
@@ -80,13 +80,13 @@ const Upload = ({navigation}: any) => {
     setData({...data, [key]: value});
   };
   const handleSubmit = async () => {
-    // Check if any field is empty
-
     try {
       const PictureURL = await uploadImage();
+      const randomId = firestore().collection('allUserData').doc().id;
       await firestore()
-        .collection('User Data')
-        .add({...data, PictureURL});
+        .collection('allUserData')
+        .doc(randomId)
+        .set({...data, PictureURL, randomId});
       console.log('Data added successfully!');
       Alert.alert('Data added successfully!');
       setData({
