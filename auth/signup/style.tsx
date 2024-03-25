@@ -60,6 +60,7 @@ const signupStyle = StyleSheet.create({
     height: 44,
     marginLeft: 33,
     marginRight: 4,
+    color: 'black',
     maxWidth: 500,
     width: 308,
     justifyContent: 'center',

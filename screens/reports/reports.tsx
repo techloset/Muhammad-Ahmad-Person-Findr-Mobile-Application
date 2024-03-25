@@ -59,7 +59,7 @@ const App = ({navigation}: any) => {
           <TextInput
             placeholder="Search"
             placeholderTextColor="black"
-            style={{marginLeft: 13}}
+            style={{marginLeft: 13, color: 'black'}}
             value={searchQuery}
             onChangeText={setSearchQuery}
           />

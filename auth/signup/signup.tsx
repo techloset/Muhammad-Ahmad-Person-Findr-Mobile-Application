@@ -55,6 +55,7 @@ const Signup = ({navigation}: any) => {
           }}
           value={inputValue}
           placeholder="Please type here…"
+          placeholderTextColor="black"
         />
         <Text style={signupStyle.textemail}>Email</Text>
         <View style={signupStyle.inputemail}>
@@ -66,19 +67,22 @@ const Signup = ({navigation}: any) => {
               height: 44,
               borderRadius: 8,
               borderWidth: 0,
+              color: 'black',
             }}
             placeholder="Please type here…"
+            placeholderTextColor="black"
             keyboardType="email-address"
             onChangeText={email => setEmail(email)}
           />
         </View>
-        <Text style={{marginLeft: 33, marginRight: 34}}>
+        <Text style={{marginLeft: 33, marginRight: 34, color: 'black'}}>
           Your email address is your username.
         </Text>
         <Text style={signupStyle.passwordH}>password</Text>
         <TextInput
           style={[signupStyle.input1, {color: getPasswordColor()}]}
           placeholder="Please type here…"
+          placeholderTextColor="black"
           secureTextEntry
           onChangeText={text => setPassword(text)}
           value={password}
@@ -87,6 +91,7 @@ const Signup = ({navigation}: any) => {
           style={{
             marginLeft: 33,
             marginRight: 34,
+            color: 'black',
           }}>
           Your password must be 8 character.{' '}
         </Text>
@@ -103,7 +108,13 @@ const Signup = ({navigation}: any) => {
             Remember me
           </Text>
         </View>
-        <Text style={{height: 20, width: 500, marginHorizontal: 90}}>
+        <Text
+          style={{
+            height: 20,
+            width: 500,
+            color: 'black',
+            marginHorizontal: 90,
+          }}>
           Save my login details for next time.
         </Text>
         <TouchableOpacity onPress={handleSignUp} style={signupStyle.button}>

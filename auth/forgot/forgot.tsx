@@ -1,4 +1,11 @@
-import {View, Text, Image, TextInput, TouchableOpacity} from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  TextInput,
+  TouchableOpacity,
+  ScrollView,
+} from 'react-native';
 import useForgot from './useForgot';
 import {Images} from '../../assets/constants/constants';
 import forgotStyles from './style';
@@ -7,7 +14,7 @@ export const Forgot = ({navigation}: any) => {
   const {handleResetPassword, email, setEmail} = useForgot(navigation);
 
   return (
-    <View>
+    <ScrollView>
       <View
         style={{flexDirection: 'row', marginLeft: 47, marginTop: 29, gap: 16}}>
         <TouchableOpacity onPress={() => navigation.navigate('Login')}>
@@ -40,6 +47,7 @@ export const Forgot = ({navigation}: any) => {
           onChangeText={text => setEmail(text)}
           value={email}
           placeholder="Please type here…"
+          placeholderTextColor="black"
         />
       </View>
       <TouchableOpacity
@@ -47,7 +55,7 @@ export const Forgot = ({navigation}: any) => {
         onPress={handleResetPassword}>
         <Text style={forgotStyles.buttontext}>Send Reset Code</Text>
       </TouchableOpacity>
-    </View>
+    </ScrollView>
   );
 };
 

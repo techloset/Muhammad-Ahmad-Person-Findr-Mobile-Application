@@ -2,7 +2,7 @@ import {StyleSheet} from 'react-native';
 const forgotStyles = StyleSheet.create({
   forget: {
     height: 30,
-    color: '#000000',
+    color: 'black',
     fontWeight: '600',
     fontSize: 23,
   },
@@ -31,6 +31,7 @@ const forgotStyles = StyleSheet.create({
     flex: 1,
     padding: 12,
     height: 44,
+    color: 'black',
     borderRadius: 8,
     borderWidth: 0,
   },

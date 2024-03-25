@@ -16,7 +16,7 @@ const profileStyles = StyleSheet.create({
     backgroundColor: '#5B59FE',
     marginLeft: 33,
     marginRight: 34,
-    marginTop: 225,
+    marginTop: 165,
     borderRadius: 8,
   },
   inputemail: {
