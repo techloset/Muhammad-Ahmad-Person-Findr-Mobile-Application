@@ -57,7 +57,7 @@ const App = ({navigation}: any) => {
         <View style={styles.searchinput}>
           <TextInput
             placeholder="Search"
-            style={{marginLeft: 16}}
+            style={{marginLeft: 13}}
             value={searchQuery}
             onChangeText={setSearchQuery}
           />
@@ -241,7 +241,7 @@ const styles = StyleSheet.create({
     color: '#5B59FE',
     fontWeight: '500',
     fontSize: 11,
-    paddingHorizontal: 100,
+    paddingHorizontal: 80,
   },
   email: {
     backgroundColor: 'white',
@@ -259,7 +259,7 @@ const styles = StyleSheet.create({
     color: 'white',
     fontWeight: '500',
     fontSize: 11,
-    paddingHorizontal: 110,
+    paddingHorizontal: 90,
   },
   report: {
     backgroundColor: '#5B59FE',
@@ -279,7 +279,7 @@ const styles = StyleSheet.create({
   },
   first: {
     flexDirection: 'row',
-    marginLeft: 26,
+    marginLeft: 20,
     marginRight: 29,
     marginTop: 16,
     gap: 16,
@@ -306,9 +306,9 @@ const styles = StyleSheet.create({
   searchinput: {
     flexDirection: 'row',
     alignItems: 'center',
-    width: 345,
+    width: 335,
     height: 40,
-    marginLeft: 33,
+    marginLeft: 20,
     marginRight: 63,
     marginTop: 26,
     borderWidth: 1,

@@ -119,11 +119,11 @@ const Upload = ({navigation}: any) => {
           keyboardType="numeric"
         />
         <Text style={styles.h2}>Upload Photographs</Text>
-        <View style={{height: 250, width: 450, marginLeft: 20, marginTop: 20}}>
+        <View style={{height: 250, width: 470, marginLeft: 20, marginTop: 20}}>
           <TouchableOpacity onPress={imagePicker}>
             <ImageBackground
               source={Images.imagePicker}
-              style={{width: '90%', height: '100%'}}>
+              style={{width: '80%', height: '100%'}}>
               {selectedImage ? (
                 <Image
                   source={{uri: selectedImage}}
@@ -170,7 +170,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 8,
     paddingHorizontal: 10,
-    marginHorizontal: 30,
+    marginHorizontal: 17,
     marginTop: 8,
     marginBottom: 8,
     width: 335,

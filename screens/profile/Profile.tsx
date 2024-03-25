@@ -6,6 +6,7 @@ import {
   Image,
   View,
   Alert,
+  ScrollView,
 } from 'react-native';
 import React from 'react';
 import auth from '@react-native-firebase/auth';
@@ -20,7 +21,7 @@ const Profile = ({navigation}: any) => {
   };
 
   return (
-    <View>
+    <ScrollView style={{marginLeft: -5}}>
       <View style={styles.firstRow}>
         <TouchableOpacity onPress={() => navigation.navigate('Home')}>
           <Image
@@ -70,7 +71,7 @@ const Profile = ({navigation}: any) => {
       <TouchableOpacity style={styles.button}>
         <Text style={styles.buttontext}>Save Changes</Text>
       </TouchableOpacity>
-    </View>
+    </ScrollView>
   );
 };
 
@@ -90,7 +91,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#5B59FE',
     marginLeft: 33,
     marginRight: 34,
-    marginTop: 251,
+    marginTop: 225,
     borderRadius: 8,
   },
   inputemail: {

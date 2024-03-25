@@ -47,7 +47,7 @@ const Home = ({navigation}: any) => {
   }
 
   return (
-    <View>
+    <ScrollView>
       <Text style={styles.Findr}>Findr</Text>
       <Image style={styles.searchForHope} source={Images.searchForHope2} />
       <View style={styles.searchinput}>
@@ -183,7 +183,7 @@ const Home = ({navigation}: any) => {
           </TouchableOpacity>
         ))}
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
@@ -219,7 +219,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: 285,
     height: 40,
-    marginLeft: 63,
+    marginLeft: 53,
     marginRight: 63,
     marginTop: 26,
     borderWidth: 1,

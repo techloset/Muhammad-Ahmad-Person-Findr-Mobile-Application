@@ -27,6 +27,7 @@ const App = ({navigation, report}: any) => {
 
   const [newData, setNewData] = useState({
     Description: '',
+    NewLocation: '',
   });
   const handleOpen = ({report}: any) => {
     setReportData(report);
@@ -42,6 +43,7 @@ const App = ({navigation, report}: any) => {
       if (userIdDoc.exists) {
         await userIdRef.update({
           Description: newData.Description,
+          NewLocation: newData.NewLocation,
         });
         Alert.alert('Location and Description updated successfully');
       } else {
@@ -49,6 +51,7 @@ const App = ({navigation, report}: any) => {
         const newUserIdRef = await firestore().collection('allUserData').doc();
         await newUserIdRef.set({
           Description: newData.Description,
+          NewLocation: newData.NewLocation,
         });
         Alert.alert('Location and Description updated successfully');
       }

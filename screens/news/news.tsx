@@ -1,264 +1,188 @@
+import React, {useEffect, useState} from 'react';
 import {
-  StyleSheet,
-  Text,
   View,
+  Text,
   TouchableOpacity,
+  TextInput,
   Image,
+  ScrollView,
   Modal,
   Alert,
-  ScrollView,
-  TextInput,
+  Linking,
 } from 'react-native';
+import useReports from '../reports/useReports';
+import auth from '@react-native-firebase/auth';
 import {Images} from '../../assets/constants/constants';
-import React, {useState} from 'react';
+import NewsStyles from './styles';
 
-const News = ({navigation}: any) => {
-  const [modalVisible, setModalVisible] = useState(false);
+const App = ({navigation}: any) => {
+  const user = auth()?.currentUser;
+  const [searchQuery, setSearchQuery] = useState('');
+  const {
+    filteredReports,
+    setNewData,
+    handleOpen,
+    modalVisible,
+    setModalVisible,
+  } = useReports(navigation);
+  const [selectedCardIndex, setSelectedCardIndex] = useState<number | null>(
+    null,
+  );
+
+  const handleEmailContact = () => {
+    if (user?.email) {
+      Linking.openURL(`mailto:${user.email}`);
+    } else {
+      Alert.alert('Error', 'User email not found');
+    }
+  };
 
   return (
     <ScrollView>
-      <View style={styles.first}>
-        <TouchableOpacity onPress={() => navigation.navigate('Home')}>
-          <Image style={styles.backButton} source={Images.backPage} />
-        </TouchableOpacity>
-        <Text style={styles.h1}>Reports</Text>
-      </View>
-      {/* 1 */}
-      <View
-        style={{
-          flexDirection: 'row',
-          marginLeft: 5,
-          marginBottom: 16,
-        }}>
-        <View>
-          <Image style={styles.person} source={Images.profileIcon} />
-        </View>
-        <View style={{marginLeft: 8}}>
-          <Text>Name: Akriti Dwivedi</Text>
-          <Text>Reported by: Talha</Text>
-          <Text>Location: Techloset Office,</Text>
-          <Text>Faisalabad, Pakistan</Text>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => setModalVisible(true)}>
-            <Text style={styles.buttontext}>Contact Person</Text>
+      <View>
+        <View style={NewsStyles.first}>
+          <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+            <Image style={NewsStyles.backButton} source={Images.backPage} />
           </TouchableOpacity>
+          <Text style={NewsStyles.h1}>News</Text>
         </View>
-      </View>
-      {/* 2 */}
-      <View
-        style={{
-          flexDirection: 'row',
-          marginLeft: 5,
-          marginBottom: 16,
-        }}>
-        <View>
-          <Image style={styles.person} source={Images.profileIcon} />
-        </View>
-        <View style={{marginLeft: 8}}>
-          <Text>Name: Akriti Dwivedi</Text>
-          <Text>Reported by: Talha</Text>
-          <Text>Location: Techloset Office,</Text>
-          <Text>Faisalabad, Pakistan</Text>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => setModalVisible(true)}>
-            <Text style={styles.buttontext}>Contact Person</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-      {/* 3 */}
-      <View
-        style={{
-          flexDirection: 'row',
-          marginLeft: 5,
-          marginBottom: 16,
-        }}>
-        <View>
-          <Image style={styles.person} source={Images.profileIcon} />
-        </View>
-        <View style={{marginLeft: 8}}>
-          <Text>Name: Akriti Dwivedi</Text>
-          <Text>Reported by: Talha</Text>
-          <Text>Location: Techloset Office,</Text>
-          <Text>Faisalabad, Pakistan</Text>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => setModalVisible(true)}>
-            <Text style={styles.buttontext}>Contact Person</Text>
-          </TouchableOpacity>
-        </View>
+        {filteredReports
+          .filter(report =>
+            report.Name.toLowerCase().includes(searchQuery.toLowerCase()),
+          )
+          .map((report: any, index: number) => {
+            if (!report.NewLocation && !report.Description) {
+              return null;
+            }
+            return (
+              <View
+                key={index}
+                style={{
+                  flexDirection: 'row',
+                  marginLeft: 5,
+                  marginTop: 16,
+                  marginBottom: 16,
+                }}>
+                <View>
+                  <Image
+                    style={NewsStyles.person}
+                    source={{uri: report.PictureURL}}
+                  />
+                </View>
+                <View style={{marginLeft: 8}}>
+                  <Text>Name : {report.Name}</Text>
+                  <Text>Reported By : {report.ReportedBy}</Text>
+                  <Text>NickName : {report.Nickname}</Text>
+                  <Text style={{width: 250}}>
+                    Last Scene Location :{report.NewLocation}
+                  </Text>
+                  <Text style={{width: 250}}>
+                    Discription :{report.Description}
+                  </Text>
+                  <TouchableOpacity
+                    style={NewsStyles.button}
+                    onPress={() => {
+                      handleOpen({report});
+                      setSelectedCardIndex(index);
+                      setModalVisible(true);
+                    }}>
+                    <Text style={NewsStyles.buttontext}>Contact Person</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+            );
+          })}
       </View>
       {/* popup */}
+      <View style={NewsStyles.centeredView}>
+        {filteredReports.map((report: any, index: number) => (
+          <TouchableOpacity
+            key={index}
+            onPress={() => {
+              setSelectedCardIndex(index);
+              setModalVisible(true);
+            }}>
+            <Modal
+              animationType="slide"
+              transparent={true}
+              visible={modalVisible && selectedCardIndex === index}
+              onRequestClose={() => {
+                Alert.alert('Modal has been closed.');
+                setModalVisible(false);
+              }}>
+              <View style={NewsStyles.centeredView}>
+                <View style={NewsStyles.modalView}>
+                  <TouchableOpacity
+                    onPress={() => {
+                      setSelectedCardIndex(null);
+                      setModalVisible(false);
+                    }}>
+                    <Image style={NewsStyles.cancel} source={Images.cancel} />
+                  </TouchableOpacity>
+                  <Image
+                    style={NewsStyles.personpopup}
+                    source={{uri: report.PictureURL}}
+                  />
+                  <Text style={{color: '#000000'}}>Name : {report.Name}</Text>
+                  <Text style={{color: '#000000'}}>
+                    Date Of Birth : {report.Dateofbirth}
+                  </Text>
+                  <Text style={{color: '#000000'}}>
+                    Last Seen Location : {report.LastSceneLocation}
+                  </Text>
 
-      <View style={styles.centeredView}>
-        <Modal
-          animationType="slide"
-          transparent={true}
-          visible={modalVisible}
-          onRequestClose={() => {
-            Alert.alert('Modal has been closed.');
-            setModalVisible(!modalVisible);
-          }}>
-          <View style={styles.centeredView}>
-            <View style={styles.modalView}>
-              <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
-                <Image style={styles.cancel} source={Images.cancel} />
-              </TouchableOpacity>
-              <Image style={styles.personpopup} source={Images.profileIcon} />
-              <Text style={{color: '#000000'}}>Akriti Dwivedi</Text>
-              <Text style={{color: '#000000'}}>25 Years Old Male</Text>
-              <Text style={{color: '#000000'}}>
-                Last Seen Time: 1/11/23 12:32:23 IST
-              </Text>
-              <Text style={{color: '#000000'}}>Last Seen Location: Mumbai</Text>
-              <TextInput
-                placeholder="Location"
-                style={{
-                  width: 303,
-                  marginTop: 16,
-                  marginHorizontal: 16,
-                  borderWidth: 1,
-                  height: 34,
-                  borderRadius: 8,
-                  gap: 10,
-                  padding: 8,
-                }}
-              />
-              <TextInput
-                placeholder="More Description"
-                style={{
-                  width: 303,
-                  marginTop: 16,
-                  marginHorizontal: 16,
-                  borderWidth: 1,
-                  height: 100,
-                  borderRadius: 8,
-                  gap: 10,
-                  padding: 8,
-                }}
-              />
-              <TouchableOpacity style={styles.email}>
-                <Text style={styles.emailtext}>Contact Via Email</Text>
-              </TouchableOpacity>
+                  <TextInput
+                    placeholder="Location"
+                    style={{
+                      width: 303,
+                      marginTop: 16,
+                      marginHorizontal: 16,
+                      borderWidth: 1,
+                      height: 34,
+                      borderRadius: 8,
+                      gap: 10,
+                      padding: 8,
+                    }}
+                    onChangeText={text =>
+                      setNewData(prevState => ({
+                        ...prevState,
+                        NewLocation: text,
+                      }))
+                    }
+                  />
 
-              <TouchableOpacity style={styles.report}>
-                <Text style={styles.reporttext}>Report Found</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </Modal>
+                  <TextInput
+                    placeholder="More Description"
+                    style={{
+                      width: 303,
+                      marginTop: 16,
+                      marginHorizontal: 16,
+                      borderWidth: 1,
+                      height: 100,
+                      borderRadius: 8,
+                      gap: 10,
+                      padding: 8,
+                    }}
+                    onChangeText={text =>
+                      setNewData(prevState => ({
+                        ...prevState,
+                        Description: text,
+                      }))
+                    }
+                  />
+                  <TouchableOpacity
+                    style={NewsStyles.email}
+                    onPress={handleEmailContact}>
+                    <Text style={NewsStyles.emailtext}>Contact Via Email</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+            </Modal>
+          </TouchableOpacity>
+        ))}
       </View>
     </ScrollView>
   );
 };
 
-export default News;
-const styles = StyleSheet.create({
-  emailtext: {
-    marginTop: 10,
-    marginBottom: 10,
-    textAlign: 'center',
-    color: '#5B59FE',
-    fontWeight: '500',
-    fontSize: 11,
-    paddingHorizontal: 100,
-  },
-  email: {
-    backgroundColor: 'white',
-    marginLeft: 18,
-    marginRight: 17,
-    marginTop: 112,
-    borderRadius: 8,
-    borderColor: '#5B59FE',
-    borderWidth: 1,
-  },
-  reporttext: {
-    marginTop: 10,
-    marginBottom: 10,
-    textAlign: 'center',
-    color: 'white',
-    fontWeight: '500',
-    fontSize: 11,
-    paddingHorizontal: 110,
-  },
-  report: {
-    backgroundColor: '#5B59FE',
-    marginLeft: 18,
-    marginRight: 17,
-    marginTop: 16,
-    borderRadius: 8,
-  },
-  first: {
-    flexDirection: 'row',
-    marginLeft: 26,
-    marginRight: 29,
-    marginTop: 16,
-    gap: 16,
-    marginBottom: 26,
-  },
-  backButton: {
-    marginLeft: 3,
-    width: 18,
-    height: 12,
-    marginTop: 8,
-  },
-  personpopup: {
-    width: 100,
-    height: 100,
-    marginTop: 24,
-    marginLeft: 118,
-    marginRight: 117,
-    marginBottom: 16,
-  },
-  person: {
-    marginLeft: 20,
-    width: 115,
-    height: 154,
-  },
-  h1: {
-    height: 30,
-    color: '#000000',
-    fontWeight: '600',
-    fontSize: 23,
-  },
-  buttontext: {
-    marginVertical: 5,
-    textAlign: 'center',
-    color: 'white',
-    fontWeight: '500',
-    fontSize: 11,
-  },
-  button: {
-    backgroundColor: '#5B59FE',
-    marginTop: 15,
-    borderRadius: 8,
-    width: 95,
-  },
-  centeredView: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 22,
-  },
-  modalView: {
-    margin: 20,
-    backgroundColor: 'white',
-    borderRadius: 20,
-    padding: 23,
-    alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
-  },
-  cancel: {
-    width: 10,
-    height: 10,
-    marginLeft: 308,
-  },
-});
+export default App;
