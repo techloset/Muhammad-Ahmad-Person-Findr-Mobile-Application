@@ -19,12 +19,20 @@ import {RootState} from '../../redux/store/Store';
 import useReports from '../reports/useReports';
 import {Images} from '../../assets/constants/constants';
 import auth from '@react-native-firebase/auth';
+import homeStyles from './style';
 
 const Home = ({navigation}: any) => {
   const user = auth()?.currentUser;
   const {loading} = useSelector((state: RootState) => state.firestore);
-  const {filteredReports, modalVisible, setModalVisible} =
-    useReports(navigation);
+  const {
+    filteredReports,
+    modalVisible,
+    setNewData,
+    handleOpen,
+    handleFilter,
+    handleSubmit,
+    setModalVisible,
+  } = useReports(navigation);
   const [selectedCardIndex, setSelectedCardIndex] = useState<number | null>(
     null,
   );
@@ -39,7 +47,7 @@ const Home = ({navigation}: any) => {
 
   if (loading) {
     return (
-      <View style={styles.loadingContainer}>
+      <View style={homeStyles.loadingContainer}>
         <ActivityIndicator size="large" color="blue" />
         <Text style={{marginTop: 40}}>Please Wait....</Text>
       </View>
@@ -48,13 +56,13 @@ const Home = ({navigation}: any) => {
 
   return (
     <ScrollView>
-      <Text style={styles.Findr}>Findr</Text>
-      <Image style={styles.searchForHope} source={Images.searchForHope2} />
-      <View style={styles.searchinput}>
+      <Text style={homeStyles.Findr}>Findr</Text>
+      <Image style={homeStyles.searchForHope} source={Images.searchForHope2} />
+      <View style={homeStyles.searchinput}>
         <TextInput placeholder="Search" style={{marginLeft: 16}} />
-        <Image style={styles.search} source={Images.search} />
+        <Image style={homeStyles.search} source={Images.search} />
       </View>
-      <Image style={styles.main} source={Images.main} />
+      <Image style={homeStyles.main} source={Images.main} />
       <View style={{marginTop: 20, flexDirection: 'row', marginHorizontal: 40}}>
         <Text style={{fontWeight: '400', fontSize: 23, color: '#0F0F0F'}}>
           Featured Profiles
@@ -76,29 +84,30 @@ const Home = ({navigation}: any) => {
         style={{marginTop: 10, height: 320, width: 380, marginLeft: 20}}
         horizontal={true}>
         {filteredReports.map((report: any, index: number) => (
-          <View style={styles.mainView} key={index}>
-            <Text style={styles.mainHeading}>MISSING</Text>
+          <View style={homeStyles.mainView} key={index}>
+            <Text style={homeStyles.mainHeading}>MISSING</Text>
             <ImageBackground
-              style={styles.imageBackground}
+              style={homeStyles.imageBackground}
               source={{uri: report.PictureURL}}>
               <LinearGradient
-                style={styles.overlay}
+                style={homeStyles.overlay}
                 colors={['transparent', 'rgba(0, 0, 0, 6)']}>
                 <View style={{marginLeft: 8}}>
-                  <Text style={styles.color}>Name : {report.Name}</Text>
-                  <Text style={styles.color}>
+                  <Text style={homeStyles.color}>Name : {report.Name}</Text>
+                  <Text style={homeStyles.color}>
                     Reported by : {report.ReportedBy}
                   </Text>
-                  <Text style={styles.color}>
+                  <Text style={homeStyles.color}>
                     Location : {report.LastSceneLocation}
                   </Text>
                   <TouchableOpacity
-                    style={styles.button}
+                    style={homeStyles.button}
                     onPress={() => {
+                      handleOpen({report});
                       setSelectedCardIndex(index);
                       setModalVisible(true);
                     }}>
-                    <Text style={styles.buttontext}>View Details</Text>
+                    <Text style={homeStyles.buttontext}>View Details</Text>
                   </TouchableOpacity>
                 </View>
               </LinearGradient>
@@ -107,7 +116,7 @@ const Home = ({navigation}: any) => {
         ))}
       </ScrollView>
       {/* popup */}
-      <View style={styles.centeredView}>
+      <View style={homeStyles.centeredView}>
         {filteredReports.map((report: any, index: number) => (
           <TouchableOpacity
             key={index}
@@ -123,17 +132,17 @@ const Home = ({navigation}: any) => {
                 Alert.alert('Modal has been closed.');
                 setModalVisible(false);
               }}>
-              <View style={styles.centeredView}>
-                <View style={styles.modalView}>
+              <View style={homeStyles.centeredView}>
+                <View style={homeStyles.modalView}>
                   <TouchableOpacity
                     onPress={() => {
                       setSelectedCardIndex(null);
                       setModalVisible(false);
                     }}>
-                    <Image style={styles.cancel} source={Images.cancel} />
+                    <Image style={homeStyles.cancel} source={Images.cancel} />
                   </TouchableOpacity>
                   <Image
-                    style={styles.personpopup}
+                    style={homeStyles.personpopup}
                     source={{uri: report.PictureURL}}
                   />
                   <Text style={{color: '#000000'}}>Name : {report.Name}</Text>
@@ -155,7 +164,14 @@ const Home = ({navigation}: any) => {
                       gap: 10,
                       padding: 8,
                     }}
+                    onChangeText={text =>
+                      setNewData(prevState => ({
+                        ...prevState,
+                        NewLocation: text,
+                      }))
+                    }
                   />
+
                   <TextInput
                     placeholder="More Description"
                     style={{
@@ -168,14 +184,22 @@ const Home = ({navigation}: any) => {
                       gap: 10,
                       padding: 8,
                     }}
+                    onChangeText={text =>
+                      setNewData(prevState => ({
+                        ...prevState,
+                        Description: text,
+                      }))
+                    }
                   />
                   <TouchableOpacity
-                    style={styles.email}
+                    style={homeStyles.email}
                     onPress={handleEmailContact}>
-                    <Text style={styles.emailtext}>Contact Via Email</Text>
+                    <Text style={homeStyles.emailtext}>Contact Via Email</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity style={styles.report}>
-                    <Text style={styles.reporttext}>Report Found</Text>
+                  <TouchableOpacity
+                    style={homeStyles.report}
+                    onPress={handleSubmit}>
+                    <Text style={homeStyles.reporttext}>Report Found</Text>
                   </TouchableOpacity>
                 </View>
               </View>
@@ -188,167 +212,3 @@ const Home = ({navigation}: any) => {
 };
 
 export default Home;
-
-const styles = StyleSheet.create({
-  main: {marginTop: 27, marginHorizontal: 38, width: 335, height: 224},
-  Findr: {
-    color: '#5B59FE',
-    marginTop: 8,
-    fontFamily: 'Familjen Grotesk',
-    fontSize: 64,
-    fontWeight: '700',
-    lineHeight: 77,
-    textAlign: 'center',
-  },
-  searchForHope: {
-    width: 115,
-    height: 24,
-    marginLeft: 185,
-    marginRight: 105,
-    marginTop: -20,
-  },
-  search: {
-    width: 19,
-    height: 19,
-    marginLeft: 185,
-    marginRight: 9,
-    marginTop: 0,
-  },
-  searchinput: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    width: 285,
-    height: 40,
-    marginLeft: 53,
-    marginRight: 63,
-    marginTop: 26,
-    borderWidth: 1,
-    borderColor: '#0F0F0F',
-    borderRadius: 8,
-  },
-  color: {
-    color: 'white',
-  },
-  main2: {
-    width: 365,
-    height: 304,
-    borderRadius: 8,
-    marginRight: 16,
-    flexDirection: 'row',
-    gap: 10,
-    marginLeft: 20,
-  },
-  imageBackground: {
-    width: 213,
-    height: 260,
-  },
-  overlay: {
-    flex: 1,
-    justifyContent: 'flex-end',
-    padding: 16,
-  },
-  mainView: {
-    width: 213,
-    height: 44,
-    borderRadius: 8,
-    backgroundColor: '#CC4141',
-    marginRight: 16,
-  },
-  mainHeading: {
-    width: 160,
-    height: 38,
-    paddingTop: 2,
-    paddingLeft: 31,
-    fontWeight: '400',
-    marginBottom: 3,
-    fontSize: 32,
-    color: '#FFFFFF',
-  },
-  buttontext: {
-    marginVertical: 5,
-    textAlign: 'center',
-    color: 'white',
-    fontWeight: '500',
-    fontSize: 11,
-  },
-  button: {
-    backgroundColor: '#5B59FE',
-    marginTop: 15,
-    borderRadius: 8,
-    width: 95,
-  },
-  centeredView: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 22,
-  },
-  cancel: {
-    width: 10,
-    height: 10,
-    marginLeft: 308,
-  },
-  modalView: {
-    margin: 20,
-    backgroundColor: 'white',
-    borderRadius: 20,
-    padding: 23,
-    alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
-  },
-  emailtext: {
-    marginTop: 10,
-    marginBottom: 10,
-    textAlign: 'center',
-    color: '#5B59FE',
-    fontWeight: '500',
-    fontSize: 11,
-    paddingHorizontal: 100,
-  },
-  email: {
-    backgroundColor: 'white',
-    marginLeft: 18,
-    marginRight: 17,
-    marginTop: 112,
-    borderRadius: 8,
-    borderColor: '#5B59FE',
-    borderWidth: 1,
-  },
-  reporttext: {
-    marginTop: 10,
-    marginBottom: 10,
-    textAlign: 'center',
-    color: 'white',
-    fontWeight: '500',
-    fontSize: 11,
-    paddingHorizontal: 110,
-  },
-  report: {
-    backgroundColor: '#5B59FE',
-    marginLeft: 18,
-    marginRight: 17,
-    marginTop: 16,
-    borderRadius: 8,
-  },
-  personpopup: {
-    width: 100,
-    height: 100,
-    marginTop: 24,
-    marginLeft: 118,
-    marginRight: 117,
-    marginBottom: 16,
-    borderRadius: 200,
-  },
-  loadingContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
