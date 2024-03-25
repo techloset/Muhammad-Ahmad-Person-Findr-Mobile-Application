@@ -1,7 +1,13 @@
 import {StyleSheet} from 'react-native';
 
 const homeStyles = StyleSheet.create({
-  main: {marginTop: 27, marginHorizontal: 38, width: 335, height: 224},
+  main: {
+    marginTop: 27,
+    marginHorizontal: 20,
+    width: '90%',
+    height: 224,
+    borderRadius: 8,
+  },
   Findr: {
     color: '#5B59FE',
     marginTop: 8,
@@ -121,7 +127,7 @@ const homeStyles = StyleSheet.create({
     color: '#5B59FE',
     fontWeight: '500',
     fontSize: 11,
-    paddingHorizontal: 100,
+    paddingHorizontal: 70,
   },
   email: {
     backgroundColor: 'white',
@@ -139,7 +145,7 @@ const homeStyles = StyleSheet.create({
     color: 'white',
     fontWeight: '500',
     fontSize: 11,
-    paddingHorizontal: 110,
+    paddingHorizontal: 80,
   },
   report: {
     backgroundColor: '#5B59FE',

@@ -64,6 +64,7 @@ const Upload = ({navigation}: any) => {
               style={uploadStyles.datePickerInput}
               editable={false}
               placeholder="Select Date"
+              placeholderTextColor="black"
               value={data.Dateofbirth}
             />
             <Image style={{marginRight: 10}} source={Images.calender} />

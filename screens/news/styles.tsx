@@ -33,7 +33,7 @@ const NewsStyles = StyleSheet.create({
     color: '#5B59FE',
     fontWeight: '500',
     fontSize: 11,
-    paddingHorizontal: 80,
+    paddingHorizontal: 70,
   },
   email: {
     backgroundColor: 'white',

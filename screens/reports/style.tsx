@@ -34,7 +34,7 @@ const reportStyles = StyleSheet.create({
     color: '#5B59FE',
     fontWeight: '500',
     fontSize: 11,
-    paddingHorizontal: 80,
+    paddingHorizontal: 70,
   },
   email: {
     backgroundColor: 'white',
@@ -52,7 +52,7 @@ const reportStyles = StyleSheet.create({
     color: 'white',
     fontWeight: '500',
     fontSize: 11,
-    paddingHorizontal: 90,
+    paddingHorizontal: 80,
   },
   report: {
     backgroundColor: '#5B59FE',

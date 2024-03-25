@@ -64,6 +64,7 @@ const Profile = ({navigation}: any) => {
             padding: 12,
             height: 44,
             borderRadius: 8,
+            color: 'black',
             borderWidth: 0,
           }}
           value={user?.email || ''}

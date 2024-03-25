@@ -62,6 +62,7 @@ const profileStyles = StyleSheet.create({
     width: 308,
     justifyContent: 'center',
     borderRadius: 8,
+    color: 'black',
     borderWidth: 1,
     borderColor: '#D0D5DD',
   },

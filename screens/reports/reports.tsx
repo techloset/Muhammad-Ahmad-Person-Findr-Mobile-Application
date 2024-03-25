@@ -58,6 +58,7 @@ const App = ({navigation}: any) => {
         <View style={reportStyles.searchinput}>
           <TextInput
             placeholder="Search"
+            placeholderTextColor="black"
             style={{marginLeft: 13}}
             value={searchQuery}
             onChangeText={setSearchQuery}
@@ -91,11 +92,15 @@ const App = ({navigation}: any) => {
                 />
               </View>
               <View style={{marginLeft: 8}}>
-                <Text>Name : {report.Name}</Text>
-                <Text>NickName : {report.Nickname}</Text>
-                <Text>Reported By : {report.ReportedBy}</Text>
+                <Text style={{color: 'black'}}>Name : {report.Name}</Text>
+                <Text style={{color: 'black'}}>
+                  NickName : {report.Nickname}
+                </Text>
+                <Text style={{color: 'black'}}>
+                  Reported By : {report.ReportedBy}
+                </Text>
 
-                <Text style={{width: 250}}>
+                <Text style={{width: 250, color: 'black'}}>
                   Last Scene Location : {report.LastSceneLocation}
                 </Text>
                 <TouchableOpacity
@@ -150,11 +155,13 @@ const App = ({navigation}: any) => {
 
                   <TextInput
                     placeholder="Location"
+                    placeholderTextColor="black"
                     style={{
                       width: 303,
                       marginTop: 16,
                       marginHorizontal: 16,
                       borderWidth: 1,
+                      color: 'black',
                       height: 34,
                       borderRadius: 8,
                       gap: 10,
@@ -170,9 +177,11 @@ const App = ({navigation}: any) => {
 
                   <TextInput
                     placeholder="More Description"
+                    placeholderTextColor="black"
                     style={{
                       width: 303,
                       marginTop: 16,
+                      color: 'black',
                       marginHorizontal: 16,
                       borderWidth: 1,
                       height: 100,
@@ -180,6 +189,7 @@ const App = ({navigation}: any) => {
                       gap: 10,
                       padding: 8,
                     }}
+                    multiline={true}
                     onChangeText={text =>
                       setNewData(prevState => ({
                         ...prevState,

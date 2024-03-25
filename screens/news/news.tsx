@@ -70,13 +70,17 @@ const App = ({navigation}: any) => {
                   />
                 </View>
                 <View style={{marginLeft: 8}}>
-                  <Text>Name : {report.Name}</Text>
-                  <Text>Reported By : {report.ReportedBy}</Text>
-                  <Text>NickName : {report.Nickname}</Text>
-                  <Text style={{width: 250}}>
+                  <Text style={{color: 'black'}}>Name : {report.Name}</Text>
+                  <Text style={{color: 'black'}}>
+                    Reported By : {report.ReportedBy}
+                  </Text>
+                  <Text style={{color: 'black'}}>
+                    NickName : {report.Nickname}
+                  </Text>
+                  <Text style={{width: 200, color: 'black'}}>
                     Last Scene Location :{report.NewLocation}
                   </Text>
-                  <Text style={{width: 250}}>
+                  <Text style={{width: 200, color: 'black'}}>
                     Discription :{report.Description}
                   </Text>
                   <TouchableOpacity
@@ -133,6 +137,7 @@ const App = ({navigation}: any) => {
 
                   <TextInput
                     placeholder="Location"
+                    placeholderTextColor="black"
                     style={{
                       width: 303,
                       marginTop: 16,
@@ -153,6 +158,7 @@ const App = ({navigation}: any) => {
 
                   <TextInput
                     placeholder="More Description"
+                    placeholderTextColor="black"
                     style={{
                       width: 303,
                       marginTop: 16,

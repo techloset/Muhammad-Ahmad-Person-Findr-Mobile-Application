@@ -59,11 +59,21 @@ const Home = ({navigation}: any) => {
       <Text style={homeStyles.Findr}>Findr</Text>
       <Image style={homeStyles.searchForHope} source={Images.searchForHope2} />
       <View style={homeStyles.searchinput}>
-        <TextInput placeholder="Search" style={{marginLeft: 16}} />
+        <TextInput
+          placeholder="Search"
+          placeholderTextColor="black"
+          style={{marginLeft: 16, color: 'black'}}
+        />
         <Image style={homeStyles.search} source={Images.search} />
       </View>
       <Image style={homeStyles.main} source={Images.main} />
-      <View style={{marginTop: 20, flexDirection: 'row', marginHorizontal: 40}}>
+      <View
+        style={{
+          marginTop: 20,
+          flexDirection: 'row',
+          width: '90%',
+          marginHorizontal: 20,
+        }}>
         <Text style={{fontWeight: '400', fontSize: 23, color: '#0F0F0F'}}>
           Featured Profiles
         </Text>
@@ -81,7 +91,7 @@ const Home = ({navigation}: any) => {
       </View>
       {/* Slider */}
       <ScrollView
-        style={{marginTop: 10, height: 320, width: 380, marginLeft: 20}}
+        style={{marginTop: 10, height: 320, width: '90%', marginLeft: 20}}
         horizontal={true}>
         {filteredReports.map((report: any, index: number) => (
           <View style={homeStyles.mainView} key={index}>
@@ -154,12 +164,14 @@ const Home = ({navigation}: any) => {
                   </Text>
                   <TextInput
                     placeholder="Location"
+                    placeholderTextColor="black"
                     style={{
                       width: 303,
                       marginTop: 16,
                       marginHorizontal: 16,
                       borderWidth: 1,
                       height: 34,
+                      color: 'black',
                       borderRadius: 8,
                       gap: 10,
                       padding: 8,
@@ -174,6 +186,7 @@ const Home = ({navigation}: any) => {
 
                   <TextInput
                     placeholder="More Description"
+                    placeholderTextColor="black"
                     style={{
                       width: 303,
                       marginTop: 16,
@@ -181,9 +194,11 @@ const Home = ({navigation}: any) => {
                       borderWidth: 1,
                       height: 100,
                       borderRadius: 8,
+                      color: 'black',
                       gap: 10,
                       padding: 8,
                     }}
+                    multiline={true}
                     onChangeText={text =>
                       setNewData(prevState => ({
                         ...prevState,
